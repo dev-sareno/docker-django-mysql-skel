@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',  # ignored when DEBUG = True
+
+    'djangoplayground'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +130,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+STATICFILES_FINDERS = [
+    # Scans the path under STATICFILES_DIRS
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+
+    # Scans the app/static folders. Note: ensure the app is added to INSTALLED_APPS
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "misc"),
+]
